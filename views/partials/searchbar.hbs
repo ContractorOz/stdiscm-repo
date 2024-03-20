@@ -1,0 +1,20 @@
+<section class="search-section">
+  <form id="searchForm"  {{#if action}} action="{{action}}" method="get" {{/if}}>
+    {{#if articleStatus}}
+      <input type="hidden" name="status" value="{{articleStatus}}" />
+    {{/if}}
+    <div class="search-section__container">
+      <input
+        class="search-section__input"
+        type="text"
+        placeholder="{{this.title}}"
+        name="q"
+      />
+      <button type="submit">
+        <span class="material-symbols-outlined">
+          search
+        </span>
+      </button>
+    </div>
+  </form>
+</section>

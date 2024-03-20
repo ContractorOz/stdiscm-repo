@@ -1,0 +1,48 @@
+{
+  "name": "ccs-repo",
+  "version": "1.0.0",
+  "description": "Research Paper Repository for DLSU College of Computer Studies",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --ci --passWithNoTests --coverage",
+    "test:unit": "jest unit --ci --passWithNoTests",
+    "test:int": "jest int --ci --passWithNoTests --detectOpenHandles",
+    "dev": "nodemon server",
+    "start": "node server",
+    "init-mongo": "migrate-mongo init",
+    "create-migration": "migrate-mongo create",
+    "migration-up": "migrate-mongo up",
+    "migration-down": "migrate-mongo down",
+    "migration-status": "migrate-mongo status",
+    "lint:fix": "eslint --fix ./*.js"
+  },
+  "author": "Tyrone Sta. Maria",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.272.0",
+    "bcrypt": "^5.0.1",
+    "citation-js": "^0.6.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.4",
+    "mongoose-aggregate-paginate-v2": "^1.0.6",
+    "multer": "*",
+    "multer-s3": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "jest": "^29.4.3",
+    "migrate-mongo": "^9.0.0",
+    "mongodb-memory-server": "^8.12.2",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.3.3",
+    "supertest-session": "^4.1.0"
+  }
+}

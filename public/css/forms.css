@@ -1,0 +1,53 @@
+.form__card {
+  max-width: 450px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 3px 4px 7px 2px rgba(8, 8, 9, 0.2);
+  padding: 48px;
+  border-radius: 5px;
+}
+
+.form__card > h1 {
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.form__items {
+  flex-direction: column;
+}
+
+.form__input {
+  padding: 8px;
+  border: 1px solid #9b9b9b;
+  outline: none;
+  border-radius: 5px;
+  color: #303030;
+  font-size: 13px;
+}
+
+.form__input:focus {
+  border-color: var(--color-primary);
+}
+
+.ts-control {
+  border: none;
+  font-size: 16px;
+}
+
+.ts-control > .item {
+  background-color: var(--color-primary) !important;
+  color: white !important;
+  padding: 7px !important;
+  border-radius: 8px;
+}
+
+.submit__container {
+  align-items: center;
+}
+
+.submit__container.column {
+  flex-direction: column;
+}
+.submit__container.column > button {
+  width: 100%;
+}

@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/css/article-page.css" />
+<link rel="stylesheet" href="/css/comments.css" />
+
+{{>overlay}}
+{{>citation-modal}}
+
+<section class="padded container">	
+ 
+  <h2>Edit Comment</h2>
+  <form>
+	<textarea rows="4" class="comment-input" type="text" id="comment_content"
+						name="comment_content">{{comment.msg}}</textarea>
+	<div class="right-side">
+		<button formmethod="POST" name="btn" value="{{comment._id}}" formaction="/article/{{article._id}}/comment/edit-done" class="button inline-block">Save Comment</button>
+		<button formmethod="GET" name="btn" value="{{article._id}}" formaction="/article/{{article._id}}" class="button button--outline inline-block">Cancel</button>
+	</div>
+	
+</form>
+</section>
+<script>
+  citeArticle('{{article.citationInfo}}')
+</script>

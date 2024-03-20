@@ -1,0 +1,33 @@
+.sidebar {
+  width: 15%;
+  border-right: 1px solid var(--color-dark-2);
+  padding: 20px 0px;
+  /* float: left; */
+  position: fixed;
+  left: 0;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.sidebar > .sidebar__items > li {
+  margin-bottom: 15px;
+}
+
+.sidebar ~ section {
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 1560px) {
+  .sidebar ~ section {
+    margin-left: 300px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .sidebar > .sidebar__items {
+    padding-left: 15px;
+  }
+  .sidebar ~ section {
+    margin-left: 160px;
+  }
+}

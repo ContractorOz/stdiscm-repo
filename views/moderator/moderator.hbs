@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="/css/mod-articles.css" />
+<link rel="stylesheet" href="/css/forms.css" />
+
+{{>modal buttonName='Approve'}}
+{{>overlay}}
+
+<section class=" padded ">
+  <div class="container">
+
+    <h1>Article Requests</h1>
+  </div>
+</div>
+
+{{>searchbar title="Search articles" articleStatus="pending"}}
+<section class="padded">
+  <div class="container">
+    <div class="container">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Article Title</th>
+            <th>Reject Article</th>
+            <th>Approve Article</th>
+          </tr>
+        </thead>
+        <tbody id="articleList">
+
+          {{#if articles}}
+            {{#each articles}}
+              <tr id="{{this._id}}" data-title="{{this.title}}">
+                <td class="article-title">
+                  <a href="/moderator/article/{{this._id}}">
+                    {{this.title}}
+                  </a>
+                </td>
+                <td class="delete-article">
+                  <button class="text-red reject" value="{{this._id}}">
+                    <span class="material-symbols-outlined">
+                      cancel
+                    </span>
+                  </button>
+                </td>
+                 <td class="delete-article">
+                  <button class="text-primary approve" value="{{this._id}}">
+                    <span class="material-symbols-outlined">
+                      check_circle
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            {{/each}}
+          {{else}}
+            <tr><td>No articles found...</td></tr>
+          {{/if}}
+        </tbody>
+      </table>
+      <input type="hidden" form="searchForm" name="page" value="1" id="page">
+      <div class="pagination flex">
+        {{#paginate totalPages}}
+          <button
+            class="pagination__btn"
+            value="{{this}}"
+            onclick="handlePagination(this);"
+          >
+            {{this}}
+          </button>
+        {{/paginate}}
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/js/moderator-search.js"></script>
+<script src="/js/moderator.js"></script>

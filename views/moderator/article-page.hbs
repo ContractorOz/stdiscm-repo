@@ -1,0 +1,123 @@
+<link rel="stylesheet" href="/css/article-page.css" />
+<link rel="stylesheet" href="/css/article-request-page.css" />
+<link rel="stylesheet" href="/css/modal.css" />
+<link rel="stylesheet" href="/css/comments.css" />
+{{>modal buttonName='Remove' buttonColor='button--danger'}}
+
+<section class="padded">
+  <div class="container" id="{{article._id}}" data-title="{{article.title}}">
+    <h1 class="text-primary">{{article.title}}</h1>
+    <div class="authors">
+      <p><b>Authors: </b>
+        {{#each article.authors}}
+          {{this}},
+        {{/each}}
+      </p>
+    </div>
+    <div>
+      <p>
+        <b>Year Published:</b>
+        {{#convertDateString article.publicationDate}}
+          {{this}}
+        {{/convertDateString}}
+      </p>
+      <p>
+        <b>Keywords:</b>
+        {{#if article.keywords}}
+          {{#each article.keywords}}
+            {{this}},
+          {{/each}}
+        {{/if}}
+      </p>
+      <p>
+        <b>DOI:</b>
+        {{article.citationInfo}}
+      </p>
+      <p>
+        <b>Citation:</b>
+        <span id="citation">Loading...</span>
+      </p>
+    </div>
+    <div class="flex buttons__container">
+      <a class="button" href="{{article.articleFile}}" target="_blank">
+        <span class="material-symbols-outlined">
+          file_download
+        </span>
+        Download PDF
+      </a>
+
+    </div>
+
+    <div class="abstract">
+      <h4>Abstract</h4>
+      <p>{{article.abstract}}</p>
+    </div>
+    {{#isApproved article.status}}
+      <div class="flex buttons__container">
+        <button
+          class="button remove button--outline button--danger"
+          value="{{@root.article._id}}"
+        >
+          <span class="material-symbols-outlined">
+            delete
+          </span>
+          Delete Article
+        </button>
+      </div>
+    {{else}}
+      <div class="flex buttons__container">
+        <button
+          class="button reject button--outline button--danger"
+          value="{{@root.article._id}}"
+        >
+          <span class="material-symbols-outlined">
+            cancel
+          </span>
+          Reject Article
+        </button>
+        <button
+          class="button approve button--outline"
+          value="{{@root.article._id}}"
+        >
+          <span class="material-symbols-outlined">
+            check_circle
+          </span>
+          Approve Article
+        </button>
+      </div>
+    {{/isApproved}}
+  <br>
+  <hr>
+  <br>
+    <h2>Comments</h2>
+	{{#if comments}}
+		{{#each comment}}
+			<div class="comment-content comment-overflow">
+				<h4><a href="/moderator/edit/u/{{commenter}}">{{name}}</a></h4>	
+				<p>{{msg}}</p>
+				<div class="right-side">
+					<form>
+						<button formmethod="POST" name="btn" formaction="/article/{{../article._id}}/comment/delete" value="{{_id}}" class="button--danger button inline-block">Delete</button>
+						<button formmethod="GET" formaction="/moderator/edit/u/{{commenter}}" class="button button--outline inline-block"value="{{commenter}}">Edit User</button>
+					</form>
+				</div>
+			</div>
+		{{/each}}
+	{{else}}
+		<h4>No comments yet...</h4>
+	{{/if}}
+  
+  </div>
+  
+</section>
+<script src="/js/moderator.js"></script>
+<script>
+  const message = document.getElementById("citation");
+  const result = new Cite('{{article.citationInfo}}');
+  const citation = result.format("bibliography", {
+    format: "text",
+    template: "apa",
+  });
+  message.innerHTML = citation;
+
+</script>

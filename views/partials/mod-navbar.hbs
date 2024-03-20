@@ -1,0 +1,27 @@
+<nav>
+  <div class="nav__container container flex">
+    <h1 class="nav__logo h2">CCS Research</h1>
+    {{!-- {{#unless isArticle}}
+      <div class="nav__search">
+        <form action="/articles/search" method="GET">
+          <input type="hidden" name="origin" value="navbar" />
+          <input type="hidden" name="page" value="1" />
+          <input type="text" placeholder="Search Articles" name="q" />
+        </form>
+      </div>
+    {{/unless}} --}}
+    <button type="button" class="mobile-nav__toggle">
+      <svg viewBox="0 0 100 80" width="40" height="40">
+        <rect width="100" height="10"></rect>
+        <rect y="30" width="100" height="10"></rect>
+        <rect y="60" width="100" height="10"></rect>
+      </svg>
+    </button>
+    <ul class="flex nav__items">
+      <li><a href="/moderator"> Home</a></li>
+      <li><a href="/users/logout">Log out</a></li>
+
+    </ul>
+  </div>
+</nav>
+<script src="/js/nav.js"></script>

@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/forms.css" />
+
+<section class="padded">
+  <div class="form__card">
+    <h1>Login</h1>
+    {{>messages}}
+    {{!-- action="/users/login" method="POST" --}}
+    <form id="loginForm" > 
+      <div class="form__items flex">
+        <div class="message error-msg" id="email"></div>
+        <input
+          class="form__input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
+        <div class="message error-msg" id="password"></div>
+        <input
+          class="form__input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+
+        <div class="flex submit__container column">
+          <div class="loader"></div>
+          <button class="button" id="submitBtn">Login</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</section>
+<script src="/js/forms.js"></script>

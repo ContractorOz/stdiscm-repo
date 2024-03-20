@@ -1,0 +1,22 @@
+:root {
+  --color-primary: #41bb9b;
+  --color-dark-1: #20252b;
+  --color-dark-2: #3b3e42;
+  --color-gray: #f9f9f9;
+  --color-white: #ffffff;
+  --color-danger: #ed2939;
+
+  --font-size-xxl: 6rem;
+  --font-size-xl: 5rem;
+  --font-size-large: 4rem;
+  --font-size-h1: 3rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+  --font-size-h5: 1rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.75rem;
+
+  --font-family-heading: "Nunito", sans-serif;
+  --font-family-body: "Open Sans", sans-serif;
+}

@@ -1,0 +1,75 @@
+<div class="article">
+  <h3 class="article__heading">
+    <a class="text-primary" href="/article/{{this._id}}">{{this.title}}</a></h3>
+  <small class="article__authors">
+    {{#each authors}}
+      {{this}},
+    {{/each}}
+  </small>
+  <br />
+  <small>
+    <b>Year Published:</b>
+    {{#convertDateString publicationDate}}
+      {{this}}
+    {{/convertDateString}}
+  </small>
+  <br />
+  <small>
+    <b>DOI:</b>
+    <span class="citation">
+      {{this.citationInfo}}
+    </span>
+  </small>
+  <p class="article__abstract">
+    {{#trimString abstract}}
+      {{this}}
+    {{/trimString}}
+  </p>
+  <div class="flex article__buttons">
+    {{#if @root.userId}}
+      <button class="favorite-button flex" value="{{this._id}}" class="flex">
+        {{#if isFavorite}}
+          <span class="material-symbols-outlined">
+            grade
+          </span>
+          Add to Favorites
+        {{else}}
+          <span class="material-symbols-outlined">
+            star
+          </span>
+          Remove from Favorites
+        {{/if}}
+      </button>
+    {{/if}}
+    <button class="flex" onclick="asyncCite('{{this.citationInfo}}')">
+      <span class="material-symbols-outlined">
+        format_quote
+      </span>
+      Cite Article
+    </button>
+	  <div class="flex" style="align-items:center;">
+      <span class="material-symbols-outlined">
+        chat
+      </span>
+      {{comments.length}}
+    </div>
+    {{#if @root.userId}}
+      <button class="button button--outline vote-button" onclick="vote('{{this._id}}', 'upvote', this)" data-upvote="{{@key}}">
+        <span class="material-icons{{#isUpvoted @root.currUser.upvotes this._id}}{{this}}{{/isUpvoted}}" id="upvoteIcon-{{this._id}}">
+          thumb_up
+        </span>
+        <span id="upvoteNum-{{this._id}}">
+          {{this.upvotes}}
+        </span>
+      </button>
+      <button class="button button--outline vote-button"  onclick="vote('{{this._id}}', 'downvote', this)" data-downvote="{{@key}}">
+        <span class="material-icons{{#isDownvoted @root.currUser.downvotes this._id}}{{this}}{{/isDownvoted}}" id="downvoteIcon-{{this._id}}">
+          thumb_down
+        </span>
+        <span id="downvoteNum-{{this._id}}">
+          {{this.downvotes}}
+        </span>
+      </button>
+    {{/if}}
+  </div>
+</div>

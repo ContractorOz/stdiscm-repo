@@ -1,0 +1,21 @@
+<div class="modal">
+  <div class="modal__content">
+    <p id="modal-citation">Loading...</p>
+    <input type="text" name="citation" id="citation" hidden />
+    <button
+      class="copy-citation button button--outline"
+      onclick="copyCitation()"
+      id="copyBtn"
+    >
+      <span class="material-symbols-outlined">
+        content_copy
+      </span>
+      Copy Citation
+    </button>
+    <div class="flex">
+      <button class="button" id="cancelBtn" onclick="closeModal()">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

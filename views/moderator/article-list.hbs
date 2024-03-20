@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/mod-articles.css" />
+
+{{>modal buttonName='Delete' buttonColor='button--danger'}}
+{{>overlay}}
+
+{{>searchbar title="Search articles" articleStatus="approved"}}
+<section class="padded">
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Article Title</th>
+          <th>Delete Article</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="articleList">
+        {{#if articles}}
+          {{#each articles}}
+            <tr id="{{this._id}}" data-title="{{this.title}}">
+              <td class="article-title">
+                <a href="/moderator/article/{{this._id}}">
+                  {{this.title}}
+                </a>
+              </td>
+              <td class="delete-article">
+                <button class="text-red remove" value="{{this._id}}">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </td>
+              <td class="feature-article">
+                {{#if this.featured}}
+                  <button class="button button--outline featured" value="{{this._id}}" data-featured="featured">Remove from Featured</button>
+                {{else}}
+                  <button class="button button--outline featured" value="{{this._id}}" data-featured="">Add to Featured</button>
+                {{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        {{else}}
+          <tr><td>No articles found...</td></tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+  <input type="hidden" form="searchForm" name="page" value="1" id="page">
+  <div class="pagination flex">
+    {{#paginate totalPages}}
+      <button
+        class="pagination__btn"
+        value="{{this}}"
+        onclick="handlePagination(this);"
+      >
+        {{this}}
+      </button>
+    {{/paginate}}
+  </div>
+</section>
+<script src="/js/moderator-search.js"></script>
+<script src="/js/moderator.js"></script>

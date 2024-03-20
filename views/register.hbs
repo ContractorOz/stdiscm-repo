@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/css/forms.css" />
+
+<section class="padded">
+  <div class="form__card">
+    <h1>Register</h1>
+    {{>messages}}
+    <form id="registerForm">
+      <div class="form__items flex">
+        <div class="message error-msg" id="email"></div>
+        <input
+          class="form__input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
+
+        <div class="message error-msg" id="firstName"></div>
+        <input
+          class="form__input"
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="First Name"
+        />
+
+        <div class="message error-msg" id="lastName"></div>
+        <input
+          class="form__input"
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Last Name"
+        />
+
+        <div class="message error-msg" id="password"></div>
+        <input
+          class="form__input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+
+        <div class="message error-msg" id="confirmPassword"></div>
+        <input
+          class="form__input"
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+        />
+
+        <div class="flex submit__container column">
+          <div class="loader"></div>
+          <button class="button" id="submitBtn">Register</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<script src="/js/forms.js"></script>

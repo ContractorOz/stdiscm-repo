@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/css/following.css" />
+<link rel="stylesheet" href="/css/articles.css" />
+
+
+{{#if inAccount}}
+  {{>account-sidebar}}
+{{/if}}
+
+<section class="padded">
+  <div class="container">
+    <h1 class="text-primary">{{title}}</h1>
+    {{>searchbar title="Search users" action=route }}
+    {{#each users}}
+      {{>follow-item}}
+    {{/each}}
+    <div class="pagination flex">
+      {{#paginate totalPages}}
+        <button class="pagination__btn"  form="searchForm" name="page" value="{{this}}">
+          {{this}}
+        </button>
+      {{/paginate}}
+    </div>
+  </div>
+</section>
+
+<script src="/js/following.js"></script>

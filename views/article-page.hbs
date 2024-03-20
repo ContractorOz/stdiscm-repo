@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="/css/article-page.css" />
+<link rel="stylesheet" href="/css/comments.css" />
+
+{{>overlay}}
+{{>citation-modal}}
+<script>
+	function checkIfEmpty(){
+		var textarea = document.getElementById("comment_content")
+		if (textarea.value == ""){
+			textarea.style.backgroundColor = "red"
+			return false;
+		}
+		else{ return true }
+	}
+</script>
+
+<section class="padded container">
+  <h1 class="text-primary">{{article.title}}</h1>
+  <div class="authors">
+    <p><b>Authors: </b>
+      {{#each article.authors}}
+        {{this}},
+      {{/each}}
+    </p>
+  </div>
+  <div>
+    <p>
+      <b>Year Published:</b>
+      {{#convertDateString article.publicationDate}}
+        {{this}}
+      {{/convertDateString}}
+    </p>
+    <p>
+      <b>Keywords:</b>
+      {{#if article.keywords}}
+        {{#each article.keywords}}
+          {{this}},
+        {{/each}}
+      {{/if}}
+    </p>
+    <p><b>DOI:</b> <span id="citationInfo">{{article.citationInfo}}</span></p>
+  </div>
+  <div class="flex buttons__container">
+    <a class="button" href="{{article.articleFile}}" target="_blank">
+      <span class="material-symbols-outlined">
+        file_download
+      </span>
+      Download PDF
+    </a>
+    {{#if userId}}
+      <button
+        class="button favorite-button button--outline"
+        value="{{article._id}}"
+      >
+        {{#if article.isFavorite}}
+          <span class="material-symbols-outlined">
+            grade
+          </span>
+          Add to Favorites
+        {{else}}
+          <span class="material-symbols-outlined">
+            star
+          </span>
+          Remove from Favorites
+        {{/if}}
+      </button>
+    {{/if}}
+    <button class="button button--outline" onclick="openModal()">
+      <span class="material-symbols-outlined">
+        format_quote
+      </span>
+      Cite Article
+    </button>
+    {{#if userId}}
+      <div class="flex vote-buttons--container">
+        <button class="button button--outline vote-button" onclick="vote('{{article._id}}', 'upvote', this)">
+          <span class="material-icons{{#isUpvoted currUser.upvotes article._id}}{{this}}{{/isUpvoted}}" id="upvoteIcon-{{article._id}}">
+            thumb_up
+          </span>
+          <span id="upvoteNum-{{article._id}}">
+            {{article.upvotes}}
+          </span>
+        </button>
+        <button class="button button--outline vote-button"  onclick="vote('{{article._id}}', 'downvote', this)">
+          <span class="material-icons{{#isDownvoted currUser.downvotes article._id}}{{this}}{{/isDownvoted}}" id="downvoteIcon-{{article._id}}">
+            thumb_down
+          </span>
+          <span id="downvoteNum-{{article._id}}">
+            {{article.downvotes}}
+          </span>
+        </button>
+      </div>
+    {{/if}}
+  </div>
+  <div class="abstract">
+    <h4>Abstract</h4>
+    <p>{{article.abstract}}</p>
+  </div>
+  <br>
+  <h2>Comments</h2>
+  {{#if userId}}
+    <form onsubmit="return checkIfEmpty()" method="POST" action="{{article._id}}/comment/new" class="margin-left-32 comment-overflow">
+    <h4>Add a new comment</h4>
+    <textarea rows="4" class="comment-input" type="text" id="comment_content"
+              name="comment_content"
+              placeholder="Type something..."></textarea>
+    <button class="right-side button" type="submit">New Comment</button>
+
+    </form>
+  {{/if}}
+  <br>
+  <hr>
+  <br>
+  
+  {{#if comments}}
+    {{#each comments_temp}}
+      {{#ifEqual this.commenter ../this.sess this}}
+        <div class="comment-content comment-overflow">
+          <h4>{{this.name}}</h4>
+          <p>{{this.msg}}</p>
+          <div class="right-side">
+            <form method="POST">
+              <button name="btn" formaction="{{../article._id}}/comment/delete" value="{{this._id}}" class="button inline-block button--danger">Delete</button>
+              <button name="btn" formaction="{{../article._id}}/comment/edit" value="{{this._id}}" class="button button--outline inline-block">Edit</button>
+            </form>
+          </div>
+        </div>
+      {{else}}
+        <div class="comment-content comment-overflow">
+          {{#if ../this.isLoggedIn}}
+            <h4><a href="/users/{{this.commenter}}">{{this.name}}</a></h4>
+          {{else}}
+            <h4>{{this.name}}</h4>
+          {{/if}}			
+          <p>{{this.msg}}</p>
+        </div>
+      {{/ifEqual}}
+    {{/each}}
+
+  {{else}}
+	  <h4>No comments yet...</h4>
+  {{/if}}
+</section>
+<script>
+  citeArticle('{{article.citationInfo}}');
+</script>

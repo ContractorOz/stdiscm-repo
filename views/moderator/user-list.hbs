@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/css/mod-articles.css" />
+
+{{>modal buttonName='Delete' buttonColor='button--danger'}}
+{{>overlay}}
+
+<section class="search-section">
+  <form id="searchFormUser">
+    <input type="hidden" />
+    <div class="search-section__container">
+      <input
+        class="search-section__input"
+        type="text"
+        placeholder="Search"
+        name="q"
+      />
+      <button type="submit">
+        <span class="material-symbols-outlined">
+          search
+        </span>
+      </button>
+    </div>
+  </form>
+</section>
+<section class="padded">
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>User Email</th>
+          <th>Delete User</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="userList">
+        {{#if users}}
+          {{#each users}}
+            <tr id="{{this._id}}" data-title="{{this.email}}">
+              <td class="article-title">
+                {{this.email}}
+              </td>
+              <td class="delete-article">
+                <button class="text-red erase" value="{{this._id}}">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </td>
+              <td class="feature-article">
+                <form action="/moderator/edit/u/{{this._id}}">
+                  <button
+                    class="button button--outline edit"
+                    value="{{this._id}}"
+                  >Edit User Account</button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        {{else}}
+          <tr><td>No users found...</td></tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+  <input type="hidden" form="searchFormUser" name="page" value="1" id="page" />
+  <div class="pagination flex">
+    {{#paginate totalPages}}
+      <button
+        class="pagination__btn"
+        value="{{this}}"
+        onclick="handlePagination(this);"
+      >
+        {{this}}
+      </button>
+    {{/paginate}}
+  </div>
+</section>
+<script src="/js/moderator-search.js"></script>
+<script src="/js/moderator.js"></script>

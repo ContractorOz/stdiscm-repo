@@ -1,0 +1,9 @@
+node_modules/
+model.txt
+.env
+*.pdf
+coverage/
+log.html
+output.xml
+report.html
+*.png

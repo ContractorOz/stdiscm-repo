@@ -1,0 +1,17 @@
+{{#if error_msg}}
+  <div class="message error-msg">
+    {{#each error_msg}}
+      <small>{{this}}</small>
+      <br />
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if success_msg}}
+  <div class="message success-msg">
+    {{#each success_msg}}
+      <small>{{this}}</small>
+      <br />
+    {{/each}}
+  </div>
+{{/if}}

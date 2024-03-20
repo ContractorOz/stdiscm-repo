@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/modal.css" />
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/citation.css" />
+{{>overlay}}
+
+<div class="modal">
+  <div class="modal__content">
+    <p id="modal-citation">Loading...</p>
+    <input type="text" name="citation" id="citation" hidden />
+    <button
+      class="copy-citation button button--outline"
+      onclick="copyCitation()"
+      id="copyBtn"
+    >
+      <span class="material-symbols-outlined">
+        content_copy
+      </span>
+      Copy Citation
+    </button>
+    <div class="flex">
+      <button class="button" id="cancelBtn" onclick="closeModal()">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+<section class="hero-section">
+  <div class="bg-rect"></div>
+  <div class="hero-section__content container flex">
+    <div class="hero-section__info">
+      <h1 class="h1">COLLEGE OF COMPUTER STUDIES RESEARCH REPOSITORY</h1>
+      <p>
+        CCS Research repository is a digital research repository of scholarly and creative works of the faculty, 
+        students, and researchers of the De La Salle University College of Computer Studies.  
+      </p>
+      <a href="#featuredArticles" class="button">See Featured Articles</a>
+    </div>
+    <div class="hero-section__image">
+      <img src="/images/hero-image.svg" alt="Hero Image" />
+    </div>
+  </div>
+</section>
+<section class="padded" id="featuredArticles">
+  <div class="container">
+    <h2 class="h2">Featured Articles</h2>
+    <div class="article__list">
+      {{#each articles}}
+        {{>article-item}}
+      {{/each}}
+    </div>
+  </div>
+</section>

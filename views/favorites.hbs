@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/favorites.css" />
+{{>overlay}}
+{{>citation-modal}}
+
+<section class="padded">
+  <div class="container">
+    <h1>My Favorite Articles</h1>
+
+    {{#if favorites}}
+      <div class="article__list">
+        {{#each favorites}}
+          {{>article-item}}
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="flex no-favorites">
+        <span class="material-symbols-outlined text-dark-2">search_off</span> 
+        <h3 class="text-dark-2">
+          Uh oh.. you currently don't have any favorite articles. Find articles <a  class="text-primary text-underline" href="/articles/search">here</a>  
+        </h3>
+      </div>
+    {{/if}}
+  </div>
+</section>

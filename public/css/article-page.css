@@ -1,0 +1,17 @@
+.buttons__container {
+  margin: 24px 0;
+}
+
+.buttons__container > button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.abstract {
+  background-color: #f0f0f0;
+  padding: 24px;
+}
+.abstract h4 {
+  font-style: italic;
+}

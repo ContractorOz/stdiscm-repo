@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/favorites.css" />
+<link rel="stylesheet" href="/css/articles.css" />
+
+{{>overlay}}
+<section class="padded">
+  <div class="container">
+    <h1>{{user.firstName}} {{user.lastName}}</h1>
+    <button class="button" onclick="follow('{{user._id}}', this)">
+      {{#isFollowed currUser.following user._id}}
+        {{this}}
+      {{/isFollowed}}
+    </button>
+    {{#if favorites}}
+
+      <h2 class="favorites-heading">{{user.firstName}}&apos;s Favorite Articles</h2>
+      {{>searchbar title="Search articles" action=route }}
+      <div class="article__list container">
+        {{#each favorites}}
+          {{> article-item}}
+        {{/each}}
+      </div>
+      <div class="pagination flex">
+        {{#paginate totalPages}}
+          <button class="pagination__btn"  form="searchForm" name="page" value="{{this}}">
+            {{this}}
+          </button>
+        {{/paginate}}
+      </div>
+    {{else}}
+      <div class="flex no-favorites">
+        <span class="material-symbols-outlined text-dark-2">search_off</span> 
+        <h3 class="text-dark-2">
+          This user doesn't have any favorite articles yet. Find other users <a  class="text-primary text-underline" href="/people">here</a>  
+        </h3>
+      </div>
+    {{/if}}
+    
+  </div>
+  
+</section>
+
+<script src="/js/following.js"></script>

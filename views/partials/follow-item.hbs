@@ -1,0 +1,15 @@
+<div class="follow-item">
+  <h3>
+    <a href="/users/{{this._id}}" data-email="{{this.email}}">
+      {{this.firstName}}
+      {{this.lastName}}
+    </a>
+  </h3>
+  <button class="button" onclick="follow('{{this._id}}', this)">
+    {{#isFollowed @root.currUser.following this._id}}
+      {{this}}
+    {{/isFollowed}}
+  </button>
+</div>
+
+<script src="/js/following.js"></script>

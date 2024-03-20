@@ -1,0 +1,17 @@
+.no-favorites {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  text-align: center;
+}
+
+.no-favorites > span {
+  font-size: 64px;
+}
+
+.favorites-heading {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-dark-2);
+}

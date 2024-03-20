@@ -1,0 +1,54 @@
+@import url("./variables.css");
+@import url("./reset.css");
+@import url("./utilities.css");
+@import url("./sidebar.css");
+@import url("./nav.css");
+.article {
+  max-width: 800px;
+  background: #ffffff;
+  box-shadow: 3px 4px 7px 2px rgba(8, 8, 9, 0.2);
+  border-radius: 8px;
+  padding: 16px 10px;
+}
+
+.article__heading {
+  color: var(--color-primary);
+}
+
+.article__heading:hover {
+  text-decoration: underline;
+}
+
+.article__list > div:not(:first-child) {
+  margin-top: 12px;
+}
+
+.article__buttons > button {
+  gap: 3px;
+  align-items: center;
+  background-color: white;
+}
+
+.message:not(div:empty) {
+  padding: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.message small {
+  font-weight: bold;
+}
+
+.error-msg:not(div:empty) {
+  background-color: #f08080;
+}
+
+.error-msg small {
+  color: var(--color-danger);
+}
+
+.success-msg {
+  background-color: #29ab87;
+}
+.success-msg small {
+  color: #004b49;
+}

@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/css/account.css" />
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/sidebar.css" />
+{{>account-sidebar}}
+
+<div class="modal" onclick="closeModal()">
+  <div class="modal__content">
+    <h3>Are you sure you want to delete your account?</h3>
+    <div class="flex">
+      <button class="button button--outline" onclick="closeModal()">
+        Cancel
+      </button>
+      <form action="/users/delete/{{userId}}?_method=DELETE" method="POST">
+        <button id="deleteBtn" class="button button--danger" >Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<section class="padded ">
+  <div class="container">
+    <h1 class="text-primary">{{user.firstName}} {{user.lastName}}</h1>
+    <br />
+    <h3>Edit Account</h3>
+    <hr />
+    <form id="editAccountForm" data-userId="{{userId}}">
+      <div class="flex form__items">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value="{{user.email}}"
+          class="form__input"
+          disabled
+        />
+        <div class="message error-msg" id="firstName"></div>
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          value="{{user.firstName}}"
+          class="form__input"
+        />
+        <div class="message error-msg" id="lastName"></div>
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          value="{{user.lastName}}"
+          class="form__input"
+        />
+        <div class="loader"></div>
+        <div class="flex submit__container">
+          <button class="button" id="submitBtn">Save Changes</button>
+          <div class="loader"></div>
+        </div>
+      </div>
+    </form>
+    <div class="delete-account">
+      <h3 class="text-red">Delete Account</h3>
+      <hr />
+      <p>Once you delete your account, there is no going back. Please be certain.</p>
+      <button class="button button--danger" onclick="openModal()">Delete Account</button>
+    </div>
+  </div>
+</section>
+
+<script src="/js/account.js"></script>
+<script src="/js/forms.js"></script>
