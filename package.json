@@ -1,7 +1,7 @@
 {
-  "name": "ccs-repo",
+  "name": "stdiscm-project",
   "version": "1.0.0",
-  "description": "Research Paper Repository for DLSU College of Computer Studies",
+  "description": "STDISCM Project",
   "main": "server.js",
   "scripts": {
     "test": "jest --ci --passWithNoTests --coverage",

@@ -87,6 +87,15 @@ async function listYears() {
   return distinctYears.map((year) => year.getFullYear()).sort((a, b) => b - a);
 }
 
+//new (for genres/tags)
+async function listKeywords() {
+  const distinctKeys = await Article.distinct("keywords", {
+    status: "approved",
+  });
+
+  return distinctKeys.sort(); //alphabetical
+}
+
 function aggregateUser(q, ids, filterType) {
   return User.aggregate([
     {
@@ -150,4 +159,5 @@ module.exports = {
   listYears,
   getPaginatedUsers,
   voteArticle,
+  listKeywords,
 };

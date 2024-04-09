@@ -8,10 +8,17 @@
   </small>
   <br />
   <small>
-    <b>Year Published:</b>
+    <b>Date:</b>
     {{#convertDateString publicationDate}}
       {{this}}
     {{/convertDateString}}
+  </small>
+  <br />
+  <small class="article__keywords">
+    <b>Genre(s):</b>
+    {{#each keywords}}
+      {{this}},
+    {{/each}}
   </small>
   <br />
   <small>

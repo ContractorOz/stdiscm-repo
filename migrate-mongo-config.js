@@ -7,7 +7,7 @@ const config = {
     url: process.env.DB_URI || "mongodb://localhost:27017",
 
     // TODO Change this to your database name:
-    databaseName: "ccs-research-repo",
+    databaseName: "stdiscm-db",
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting

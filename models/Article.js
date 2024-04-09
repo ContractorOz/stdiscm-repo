@@ -26,7 +26,7 @@ const Article = new Schema({
   publicationDate: {
     type: Date,
   },
-  keywords: {
+  keyword: { //genre/tags --> idk if like ao3 edi tags dapat, pero if books genre?
     type: Array,
     required: true,
   },

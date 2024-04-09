@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  const yearCheckboxes = document.querySelectorAll("input[type=checkbox]");
+  //const yearCheckboxes = document.querySelectorAll("input[type=checkbox]");
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const filterBtn = document.getElementById("filter-btn");
+
+
   const searchInput = document.getElementById("searchQuery");
   const urlParams = new URLSearchParams(window.location.search);
   const pages = document.querySelectorAll(".pagination__btn");
@@ -23,12 +27,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
-  yearCheckboxes.forEach((item) => {
-    item.addEventListener("change", (event) => {
-      showOverlay();
-      form.submit();
-    });
+  filterBtn.addEventListener("click", async (event) => {
+    const articleId = button.value;
+    showOverlay();
+    form.submit();
   });
+
+  // yearCheckboxes.forEach((item) => {
+  //   item.addEventListener("change", (event) => {
+  //     showOverlay();
+  //     form.submit();
+  //   });
+  // });
 
   searchInput.value = urlParams.get("q");
 

@@ -7,20 +7,24 @@ const {
   identifyFavoriteArticles,
   getArticles,
   listYears,
+  listKeywords,
   voteArticle,
 } = require("../utils/helpers");
 
 async function searchArticles(req, res) {
   try {
-    const { q, year, page } = req.query;
+    const { q, year, keyword, page } = req.query;
 
     const years = Array.isArray(year) ? year : [year];
-    const { docs, totalPages } = await getArticles({ q, years, page });
+    const keywords = Array.isArray(keyword) ? keyword : [keyword];
+
+    const { docs, totalPages } = await getArticles({ q, years, keywords, page });
 
     const articles = await identifyFavoriteArticles(req.session.user, docs);
 
     const yearList = await listYears();
 
+    const keyList = await listKeywords();
     return res.render("articles", {
       title: "Articles",
       articles: articles,
@@ -28,6 +32,7 @@ async function searchArticles(req, res) {
       totalPages,
       docs: docs,
       yearList,
+      keyList,
     });
   } catch (err) {
     console.log(err);

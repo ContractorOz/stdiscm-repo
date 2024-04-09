@@ -19,8 +19,8 @@
     <div class="filter">
       <h4>Filter By:</h4>
       <div class="filter__box">
-        <fieldset form="searchForm" name="year" id="yearField">
         <h4>Year</h4>
+        <fieldset form="searchForm" name="year" id="yearField">
           {{#if yearList}}
             {{#each yearList}}
             <div>
@@ -29,16 +29,16 @@
             </div>
             {{/each}}
           {{/if}}
-      <h4>Genre</h4>
-		    {{#if genreList}}
-          {{#each genreList}}
+          </fieldset>
+          <fieldset form="searchForm" name="keyword" id="yearField">
+		  {{#if genreList}}
+            {{#each genreList}}
             <div>
-              <input type="checkbox" name="keywords" form="searchForm" id="{{this}}" value="{{this}}" />
+              <input type="checkbox" name="keyword" form="searchForm" id="{{this}}" value="{{this}}" />
               <label for="{{this}}">{{this}}</label>
             </div>
             {{/each}}
           {{/if}}
-          <button type="submit" id="filter-btn">Filter Results (TODO)</button>
         </fieldset>
       </div>
     </div>
@@ -48,7 +48,7 @@
           {{>article-item}}
         {{/each}}
       {{else}}
-        <h2>Story not found...</h2>
+        <h2>Story title not found... Please try to search author or genre!</h2>
       {{/if}}
     </div>
   </div>
