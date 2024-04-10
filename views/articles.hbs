@@ -29,6 +29,8 @@
             </div>
             {{/each}}
           {{/if}}
+          </fieldset>
+      <fieldset form="searchForm" name="year" id="yearField">
       <h4>Genre</h4>
 		    {{#if genreList}}
           {{#each genreList}}
@@ -38,8 +40,9 @@
             </div>
             {{/each}}
           {{/if}}
-          <button type="submit" id="filter-btn">Filter Results (TODO)</button>
         </fieldset>
+        <button form="searchForm" class="pagination__btn"  name="filter" type="submit" id="filter-btn">Filter Results (TODO)</button>
+
       </div>
     </div>
     <div class="article__list">
