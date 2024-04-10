@@ -44,9 +44,16 @@ router.get("/register", [alreadyLoggedIn], (req, res) => {
 
 router.get("/account/:id", [requireLogin, userOnlyRoute], async (req, res) => {
   const user = await User.findById(req.params.id).lean();
-  const { firstName, lastName } = user;
-  const name = `${firstName} ${lastName}`;
-  return res.render("account", { title: name, user });
+
+  const { username } = user;
+  const name = `${username}`;
+
+  //TODO FIND ARTICLES BY author == req.session.user.username
+  //then render the page also with article
+  const articles = await Article.find({ author: req.session.user.username }).lean();
+  console.log(articles);
+
+  return res.render("account", { title: name, user, articles });
 });
 
 router.get("/add-article", [requireLogin], (req, res) => {
@@ -76,7 +83,7 @@ router.get("/article/:id", [userOnlyRoute], async (req, res) => {
         if (user._id === req.session?.user?._id) {
           dump = {
             commenter: user._id.toString(),
-            name: user.firstName + " " + user.lastName,
+            name: "@"+user.username,
             msg: doc.comments[i].msg,
             _id: doc.comments[i]._id,
           };
@@ -90,7 +97,7 @@ router.get("/article/:id", [userOnlyRoute], async (req, res) => {
         } else {
           dump = {
             commenter: user._id.toString(),
-            name: user.firstName + " " + user.lastName,
+            name: "@"+user.username,
             msg: doc.comments[i].msg,
             _id: doc.comments[i]._id,
           };
@@ -136,10 +143,10 @@ router.post("/article/:id/comment/edit", requireLogin, async (req, res) => {
 router.post("/article/:id/comment/edit-done", requireLogin, editCommentDone);
 router.post("/article/:id/comment/delete", requireLogin, deleteComment);
 
-router.get("/favorites", [requireLogin, userOnlyRoute], async (req, res) => {
-  const favorites = req.session.user.favorites;
-  return res.render("favorites", { title: "Favorites", favorites });
-});
+// router.get("/favorites", [requireLogin, userOnlyRoute], async (req, res) => {
+//   const favorites = req.session.user.favorites;
+//   return res.render("favorites", { title: "Favorites", favorites });
+// });
 
 router.get("/people", [requireLogin, userOnlyRoute], async (req, res) => {
   const { page, q } = req.query;
@@ -158,28 +165,28 @@ router.get("/people", [requireLogin, userOnlyRoute], async (req, res) => {
   });
 });
 
-router.get(
-  "/following-list",
-  [requireLogin, userOnlyRoute],
-  async (req, res) => {
-    const { page, q } = req.query;
-    const user = req.session.user;
+// router.get(
+//   "/following-list",
+//   [requireLogin, userOnlyRoute],
+//   async (req, res) => {
+//     const { page, q } = req.query;
+//     const user = req.session.user;
 
-    const { users, totalPages } = await getPaginatedUsers(
-      q,
-      user.following.map((item) => mongoose.Types.ObjectId(item)),
-      page,
-      "$in"
-    );
+//     const { users, totalPages } = await getPaginatedUsers(
+//       q,
+//       user.following.map((item) => mongoose.Types.ObjectId(item)),
+//       page,
+//       "$in"
+//     );
 
-    return res.render("people", {
-      title: "Following list",
-      users,
-      totalPages,
-      inAccount: true,
-      route: "/following-list",
-    });
-  }
-);
+//     return res.render("people", {
+//       title: "Following list",
+//       users,
+//       totalPages,
+//       inAccount: true,
+//       route: "/following-list",
+//     });
+//   }
+// );
 
 module.exports = router;

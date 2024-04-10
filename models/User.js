@@ -9,11 +9,15 @@ const User = new Schema({
     required: true,
     unique: true,
   },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
+  // firstName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // lastName: {
+  //   type: String,
+  //   required: true,
+  // },
+  username: {
     type: String,
     required: true,
   },
@@ -21,21 +25,21 @@ const User = new Schema({
     type: String,
     required: true,
   },
-  favorites: {
-    type: [Article],
-    required: false,
-    default: [],
-  },
+  // favorites: {
+  //   type: [Article],
+  //   required: false,
+  //   default: [],
+  // },
   role: {
     type: String,
     required: true,
     default: "user",
   },
-  following: {
-    type: [String],
-    required: false,
-    default: [],
-  },
+  // following: {
+  //   type: [String],
+  //   required: false,
+  //   default: [],
+  // },
   suspended: {
     type: Boolean,
     default: false,

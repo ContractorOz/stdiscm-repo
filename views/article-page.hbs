@@ -41,12 +41,6 @@
     <p><b>DOI:</b> <span id="citationInfo">{{article.citationInfo}}</span></p>
   </div>
   <div class="flex buttons__container">
-    <a class="button" href="{{article.articleFile}}" target="_blank">
-      <span class="material-symbols-outlined">
-        file_download
-      </span>
-      Download PDF
-    </a>
     {{#if userId}}
       <button
         class="button favorite-button button--outline"
@@ -65,12 +59,6 @@
         {{/if}}
       </button>
     {{/if}}
-    <button class="button button--outline" onclick="openModal()">
-      <span class="material-symbols-outlined">
-        format_quote
-      </span>
-      Cite Article
-    </button>
     {{#if userId}}
       <div class="flex vote-buttons--container">
         <button class="button button--outline vote-button" onclick="vote('{{article._id}}', 'upvote', this)">
@@ -97,7 +85,15 @@
     <p>{{article.abstract}}</p>
   </div>
   <br>
-  <h2>Comments</h2>
+
+
+  <div class="body">
+    <p>{{article.body}}</p>
+  </div>
+
+  <br>
+  <hr>
+  <h4>Comments</h4>
   {{#if userId}}
     <form onsubmit="return checkIfEmpty()" method="POST" action="{{article._id}}/comment/new" class="margin-left-32 comment-overflow">
     <h4>Add a new comment</h4>
@@ -108,8 +104,6 @@
 
     </form>
   {{/if}}
-  <br>
-  <hr>
   <br>
   
   {{#if comments}}
@@ -138,7 +132,7 @@
     {{/each}}
 
   {{else}}
-	  <h4>No comments yet...</h4>
+	  <p>No comments yet...</p>
   {{/if}}
 </section>
 <script>

@@ -15,3 +15,12 @@
 .abstract h4 {
   font-style: italic;
 }
+
+.oneliner{
+	width:100%;
+	text-align:center;
+}
+
+.oneliner_element {
+	display:inline-block;
+}

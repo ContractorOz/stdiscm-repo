@@ -1,16 +1,16 @@
 const { body, check } = require("express-validator");
-const DOIValidator = body("citationInfo")
-  .trim()
-  .custom((value) => {
-    // eslint-disable-next-line quotes
-    const doiRegex = '(10[.][0-9]{2,}(?:[.][0-9]+)*/(?:(?![%"#? ])\\S)+)';
-    const pattern = new RegExp(
-      "^(http(s)?\\://)?(dx\\.)?doi\\.org/" + doiRegex + "$"
-    );
+// const DOIValidator = body("citationInfo")
+//   .trim()
+//   .custom((value) => {
+//     // eslint-disable-next-line quotes
+//     const doiRegex = '(10[.][0-9]{2,}(?:[.][0-9]+)*/(?:(?![%"#? ])\\S)+)';
+//     const pattern = new RegExp(
+//       "^(http(s)?\\://)?(dx\\.)?doi\\.org/" + doiRegex + "$"
+//     );
 
-    return value.match(pattern);
-  })
-  .withMessage("Please enter a valid DOI");
+//     return value.match(pattern);
+//   })
+//   .withMessage("Please enter a valid DOI");
 const fileValidator = check("file")
   .custom((value, { req }) => {
     if (req.file.mimetype === "application/pdf") {
@@ -27,8 +27,7 @@ const loginValidators = [
 
 const registerValidators = [
   body("email").trim().isEmail().withMessage("Please Provide a valid Email"),
-  body("firstName").trim().notEmpty().withMessage("First Name is required"),
-  body("lastName").trim().notEmpty().withMessage("Last Name is required"),
+  body("username").trim().notEmpty().withMessage("Username is required"),
   body("password")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long"),
@@ -45,17 +44,18 @@ const registerValidators = [
 
 const articleValidators = [
   body("title").trim().notEmpty().withMessage("Title is required"),
-  body("authors").trim().notEmpty().withMessage("Authors are required"),
+  body("author").trim().notEmpty().withMessage("Author is required"),
   body("date").trim().notEmpty().withMessage("Publication date is required"),
   body("keywords").trim().notEmpty().withMessage("Keywords are required"),
-  body("abstract").trim().notEmpty().withMessage("Abstract is required"),
-  DOIValidator,
+  body("body").trim().notEmpty().withMessage("Story's body is required"),
+  body("abstract").trim().notEmpty().withMessage("Summary is required"),
+
+  // DOIValidator,
   fileValidator,
 ];
 
 const editAccountValidators = [
-  body("firstName").notEmpty().withMessage("First Name is required"),
-  body("lastName").notEmpty().withMessage("Last Name is required"),
+  body("username").notEmpty().withMessage("Username is required"),
 ];
 
 module.exports = {

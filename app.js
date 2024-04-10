@@ -22,7 +22,7 @@ const hbs = exphbs.create({
 });
 
 const DB_URI =
-  process.env.DB_URI || "mongodb://localhost:27017/ccs-research-repo"; //TODO: change to prod once deployed
+  process.env.DB_URI || "mongodb://localhost:27017/stdiscm-db"; //TODO: change to prod once deployed
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

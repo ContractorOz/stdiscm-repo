@@ -25,6 +25,10 @@ async function searchArticles(req, res) {
     const yearList = await listYears();
 
     const keyList = await listKeywords();
+
+    console.log(yearList);
+    console.log(keyList);
+
     return res.render("articles", {
       title: "Articles",
       articles: articles,
@@ -43,17 +47,19 @@ async function addArticle(req, res) {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
-      const { title, authors, abstract, keywords, date, citationInfo } =
+      const { title, author, abstract, keywords, date, body } =
         req.body;
       const article = {
         title: title,
-        authors: authors.split(","),
+        // authors: authors.split(","),
+        author: req.session.user.username, //the author automatically becomes the current user's username
         abstract: abstract,
         publicationDate: new Date(date),
         keywords: keywords.split(","),
-        articleFile: req.file.location,
-        citationInfo: citationInfo,
+        // articleFile: req.file.location,
+        body: body,
       };
+      console.log("Adding new book:" + article);
       const newArticle = new Article({ ...article });
 
       await newArticle.save();
@@ -99,7 +105,7 @@ async function addComment(req, res) {
         $push: {
           comments: {
             commenter: currUserId,
-            name: user.firstName + " " + user.lastName,
+            name: user.username,
             msg: msg,
           },
         },

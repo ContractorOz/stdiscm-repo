@@ -7,7 +7,7 @@
           <input type="hidden" name="origin" value="navbar" />
           <input type="hidden" name="page" value="1" />
           <div class="search-container">
-            <input type="text" placeholder="Search Articles" name="q" />
+            <input type="text" placeholder="Search Books" name="q" />
             <button type="submit">
               <span class="material-symbols-outlined">
                 search
@@ -26,11 +26,10 @@
     </button>
     <ul class="flex nav__items">
       <li><a href="/"> Home</a></li>
-      <li><a href="/articles/search"> Articles</a></li>
+      <li><a href="/articles/search">Books</a></li>
+      <li><a href="/add-article">Add</a></li>
       {{#if userId}}
-        <li><a href="/favorites">Favorites</a></li>
         <li><a href="/account/{{userId}}">Account</a></li>
-        <li><a href="/people">People</a></li>
         <li><a href="/users/logout">Log out</a></li>
       {{else}}
         <li><a class="button button--outline" href="/register">Register</a></li>

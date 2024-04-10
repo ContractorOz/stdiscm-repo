@@ -14,6 +14,7 @@ const { default: mongoose } = require("mongoose");
 async function createUser(req, res) {
   const errors = validationResult(req);
   const user = req.body;
+  console.log(user)
   if (errors.isEmpty()) {
     try {
       const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
@@ -94,31 +95,31 @@ function logout(req, res) {
   }
 }
 
-async function toggleFavoriteArticles(req, res) {
-  const currUser = req.session.user;
-  let method = "";
-  if (currUser) {
-    try {
-      const user = await User.findById(currUser._id);
-      const article = await Article.findById(req.body.articleId);
-      if (!checkIfFavorited(article, user.favorites)) {
-        method = "add";
-        user.favorites.push(article);
-      } else {
-        method = "remove";
-        user.favorites = user.favorites.filter((item) => {
-          return item._id.toString() !== article._id.toString();
-        });
-      }
-      user.save();
-      req.session.user = user;
-      return res.status(200).json({ success: true, method });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  return res.redirect("/login");
-}
+// async function toggleFavoriteArticles(req, res) {
+//   const currUser = req.session.user;
+//   let method = "";
+//   if (currUser) {
+//     try {
+//       const user = await User.findById(currUser._id);
+//       const article = await Article.findById(req.body.articleId);
+//       if (!checkIfFavorited(article, user.favorites)) {
+//         method = "add";
+//         user.favorites.push(article);
+//       } else {
+//         method = "remove";
+//         user.favorites = user.favorites.filter((item) => {
+//           return item._id.toString() !== article._id.toString();
+//         });
+//       }
+//       user.save();
+//       req.session.user = user;
+//       return res.status(200).json({ success: true, method });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+//   return res.redirect("/login");
+// }
 
 async function editAccount(req, res) {
   const currUserId = req.params.id;
@@ -178,66 +179,29 @@ async function viewUser(req, res) {
     q,
     years: [undefined],
     page,
-    filter: {
-      $in: user.favorites?.map((fav) => mongoose.Types.ObjectId(fav._id)) ?? [],
-    },
+    // filter: {
+    //   $in: user.favorites?.map((fav) => mongoose.Types.ObjectId(fav._id)) ?? [],
+    // },
     limit: 3,
   });
 
-  const favorites = await identifyFavoriteArticles(req.session.user, docs);
+  // const favorites = await identifyFavoriteArticles(req.session.user, docs);
 
   return res.render("user", {
     title: "User",
     user,
-    favorites,
     totalPages,
     route: `/users/${user._id}`,
   });
 }
 
-async function followUser(req, res) {
-  const { id } = req.params;
-  const currUserId = req.session.user?._id;
-  if (!currUserId) {
-    return res
-      .status(401)
-      .send({ success: false, message: "User not logged in" });
-  }
-
-  const user = await User.findById(currUserId);
-
-  const followed = user.following.includes(id);
-  const message = followed
-    ? "User successfully unfollowed"
-    : "User successfully followed";
-
-  try {
-    await User.findById(id);
-
-    if (!followed) {
-      user.following.push(id);
-    } else {
-      user.following = user.following.filter(
-        (followingId) => id !== followingId
-      );
-    }
-
-    user.save();
-    req.session.user = user;
-
-    return res.status(200).send({ success: true, message });
-  } catch (err) {
-    return res.status(400).send({ success: false, message: "User not found" });
-  }
-}
 
 module.exports = {
   createUser,
   login,
   logout,
-  toggleFavoriteArticles,
   editAccount,
   deleteAccount,
   viewUser,
-  followUser,
+  // followUser, //not needed
 };

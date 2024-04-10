@@ -1,11 +1,13 @@
-async function follow(id, btn) {
-  const res = await fetch(`/users/follow/${id}`, { method: "PUT" });
-  const data = await res.json();
-  if (!data.success) {
-    throw new Error(data.message);
-  }
-  btn.innerText = data.message.includes("unfollowed") ? "Follow" : "Unfollow";
-}
+
+//SIMPLIFIED TO FIT OUR SPECS (has no follow users there eh)
+// async function follow(id, btn) {
+//   const res = await fetch(`/users/follow/${id}`, { method: "PUT" });
+//   const data = await res.json();
+//   if (!data.success) {
+//     throw new Error(data.message);
+//   }
+//   btn.innerText = data.message.includes("unfollowed") ? "Follow" : "Unfollow";
+// }
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const urlParams = new URLSearchParams(window.location.search);

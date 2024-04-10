@@ -4,7 +4,7 @@
 {{>overlay}}
 <section class="padded">
   <div class="container">
-    <h1>{{user.firstName}} {{user.lastName}}</h1>
+    <h1>{{user.username}}</h1>
     <button class="button" onclick="follow('{{user._id}}', this)">
       {{#isFollowed currUser.following user._id}}
         {{this}}
@@ -12,7 +12,7 @@
     </button>
     {{#if favorites}}
 
-      <h2 class="favorites-heading">{{user.firstName}}&apos;s Favorite Articles</h2>
+      <h2 class="favorites-heading">{{user.username}}&apos;s Favorite Articles</h2>
       {{>searchbar title="Search articles" action=route }}
       <div class="article__list container">
         {{#each favorites}}

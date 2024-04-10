@@ -9,13 +9,20 @@ const Article = new Schema({
     type: String,
     required: true,
   },
-  abstract: {
+  abstract: {             //summary
     type: String,
     required: true,
   },
-  authors: [String],
-  articleFile: {
+  author: {
     type: String,
+    required: true,
+  },
+  // articleFile: {
+  //   type: String,
+  // },
+  body:{
+    type:String,
+    required: true,
   },
   comments: [
     {
@@ -23,7 +30,7 @@ const Article = new Schema({
       msg: String,
     },
   ],
-  publicationDate: {
+  publicationDate: {    //year only
     type: Date,
   },
   keyword: { //genre/tags --> idk if like ao3 edi tags dapat, pero if books genre?
@@ -34,15 +41,15 @@ const Article = new Schema({
     type: Boolean,
     default: false,
   },
-  status: {
-    type: String,
-    enum: ["rejected", "pending", "approved"],
-    default: "pending",
-  },
-  citationInfo: {
-    type: String,
-    required: true,
-  },
+  // status: {
+  //   type: String,
+  //   enum: ["rejected", "pending", "approved"],
+  //   default: "pending",
+  // },
+  // citationInfo: {
+  //   type: String,
+  //   required: true,
+  // },
   upvotes: {
     type: Number,
     default: 0,

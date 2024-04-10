@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="/css/account.css" />
 <link rel="stylesheet" href="/css/forms.css" />
 <link rel="stylesheet" href="/css/sidebar.css" />
+<link rel="stylesheet" href="/css/article-item.css" />
+
 {{>account-sidebar}}
 
 <div class="modal" onclick="closeModal()">
@@ -21,7 +23,7 @@
   <div class="container">
     <h1 class="text-primary">{{user.firstName}} {{user.lastName}}</h1>
     <br />
-    <h3>Edit Account</h3>
+    <h3>Account Details</h3>
     <hr />
     <form id="editAccountForm" data-userId="{{userId}}">
       <div class="flex form__items">
@@ -34,29 +36,17 @@
           class="form__input"
           disabled
         />
-        <div class="message error-msg" id="firstName"></div>
-        <label for="firstName">First Name</label>
+        <div class="message error-msg" id="username"></div>
+        <label for="username">Username</label>
         <input
           type="text"
-          name="firstName"
-          id="firstName"
-          value="{{user.firstName}}"
+          name="username"
+          id="username"
+          value="{{user.username}}"
           class="form__input"
-        />
-        <div class="message error-msg" id="lastName"></div>
-        <label for="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value="{{user.lastName}}"
-          class="form__input"
+          disabled
         />
         <div class="loader"></div>
-        <div class="flex submit__container">
-          <button class="button" id="submitBtn">Save Changes</button>
-          <div class="loader"></div>
-        </div>
       </div>
     </form>
     <div class="delete-account">
@@ -65,6 +55,38 @@
       <p>Once you delete your account, there is no going back. Please be certain.</p>
       <button class="button button--danger" onclick="openModal()">Delete Account</button>
     </div>
+    <br>
+    <br>
+    <h3 class="text-black">My Books</h3>
+    <hr>
+    <form id="viewOwnBooks" data-userId="{{userId}}">        
+      <div class="article__list">
+        {{#if articles}}
+          {{#each articles}}
+            
+
+            <tr id="{{this._id}}" data-title="{{this.title}}">
+              <td class="article-title">
+               <a class="text-primary" href="/article/{{this._id}}">{{this.title}}</a>
+              </td>
+              <td class="delete-article">
+                <button class="text-red remove" value="{{this._id}}">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </td>
+            </tr>
+
+
+
+
+          {{/each}}
+        {{else}}
+          <h2>No Books...</h2>
+        {{/if}}
+      </div>
+    </form>
   </div>
 </section>
 

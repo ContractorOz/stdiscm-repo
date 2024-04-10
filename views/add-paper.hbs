@@ -7,15 +7,13 @@
 <section class="padded">
   <div class="container">
     {{>messages}}
-    <h1>Add article</h1>
+    <h1>Add Book</h1>
+    <h4>Please complete the following details:</h4>
     <form  enctype="multipart/form-data" id="addArticleForm">
       <div class="flex form__items">
         <label for="title">Title</label>
         <div class="message error-msg" id="title"></div>
         <input type="text" name="title" id="title" class="form__input">
-        <label for="authors">Authors</label>
-        <div class="message error-msg" id="authors"></div>
-        <input type="text" name="authors"  class="form__input multiple-inputs" placeholder="Comma-separated list (e.g. Author1, Author2)">
         <label for="date">Year Published</label>
         <div class="message error-msg" id="date"></div>
         <select name="date" id="date-input" placeholder="Select Year" class="form__input"></select>

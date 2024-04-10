@@ -56,7 +56,7 @@ async function viewArticle(req, res) {
         var user = await User.findById(article.comments[i].commenter).lean();
         dump = {
           commenter: user._id,
-          name: user.firstName + " " + user.lastName,
+          name: user.username,
           msg: article.comments[i].msg,
           _id: article.comments[i]._id,
         };
@@ -99,7 +99,7 @@ async function listArticles(req, res) {
 async function listUsers(req, res) {
   try {
     const { q, page } = req.query;
-    // console.log(users);
+    console.log(users);
     const { users, totalPages } = await getPaginatedUsers(q, [], page);
 
     return res.render("moderator/user-list", {

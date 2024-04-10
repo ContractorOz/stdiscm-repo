@@ -12,12 +12,12 @@ function checkIfFavorited(obj, list) {
 async function identifyFavoriteArticles(currUser, articles) {
   if (currUser) {
     const user = await User.findById(currUser._id);
-    return articles.map((article) => {
-      return {
-        ...article,
-        isFavorite: !checkIfFavorited(article, user.favorites),
-      };
-    });
+    // return articles.map((article) => {
+    //   return {
+    //     ...article,
+    //     isFavorite: !checkIfFavorited(article, user.favorites),
+    //   };
+    // });
   }
   return articles;
 }

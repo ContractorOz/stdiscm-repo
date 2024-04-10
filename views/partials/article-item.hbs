@@ -33,27 +33,6 @@
     {{/trimString}}
   </p>
   <div class="flex article__buttons">
-    {{#if @root.userId}}
-      <button class="favorite-button flex" value="{{this._id}}" class="flex">
-        {{#if isFavorite}}
-          <span class="material-symbols-outlined">
-            grade
-          </span>
-          Add to Favorites
-        {{else}}
-          <span class="material-symbols-outlined">
-            star
-          </span>
-          Remove from Favorites
-        {{/if}}
-      </button>
-    {{/if}}
-    <button class="flex" onclick="asyncCite('{{this.citationInfo}}')">
-      <span class="material-symbols-outlined">
-        format_quote
-      </span>
-      Cite Article
-    </button>
 	  <div class="flex" style="align-items:center;">
       <span class="material-symbols-outlined">
         chat
