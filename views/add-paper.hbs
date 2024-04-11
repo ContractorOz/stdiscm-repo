@@ -11,21 +11,27 @@
     <h4>Please complete the following details:</h4>
     <form  enctype="multipart/form-data" id="addArticleForm">
       <div class="flex form__items">
+        
         <label for="title">Title</label>
         <div class="message error-msg" id="title"></div>
         <input type="text" name="title" id="title" class="form__input">
-        <label for="date">Year Published</label>
+
+        <label for="author">Author</label>
+        <div class="message error-msg" id="author"></div>
+        <input type="text" name="author" id="author" class="form__input" value="{{author}}" disabled>
+
+        <label for="date">Year</label>
         <div class="message error-msg" id="date"></div>
         <select name="date" id="date-input" placeholder="Select Year" class="form__input"></select>
+        
         <label for="keywords">Keywords</label>
         <div class="message error-msg" id="keywords"></div>
         <input type="text" name="keywords" class="form__input multiple-inputs" placeholder="Comma-separated list (e.g. Keyword1, Keyword2)">
-        <label for="citationInfo">DOI URL</label>
-        <div class="message error-msg" id="citationInfo"></div>
-        <input type="text" name="citationInfo" id="citationInfo" class="form__input" placeholder="Please input the DOI url in the format http[s]://doi.org/<Insert DOI here>">
+        
         <label for="file">File</label>
         <div class="message error-msg" id="file"></div>
         <input type="file" name="file" id="file" accept="application/pdf" >
+        
         <label for="abstract">Abstract</label>
         <div class="message error-msg" id="abstract"></div>
         <textarea  name="abstract" id="abstract" cols="30" rows="10" class="form__input"></textarea>

@@ -4,7 +4,7 @@
 
   <div class="form__card">
     <h1>Login</h1>
-    <h4 class="text-red">{{msg}}</h4
+    <h4 class="text-red">{{msg}}</h4>
     {{>messages}}
     {{!-- action="/users/login" method="POST" --}}
     <form id="loginForm" > 
@@ -17,6 +17,7 @@
           name="email"
           placeholder="Email"
         />
+        
         <div class="message error-msg" id="password"></div>
         <input
           class="form__input"

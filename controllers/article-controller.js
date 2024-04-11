@@ -50,11 +50,13 @@ async function searchArticles(req, res) {
 }
 
 async function addArticle(req, res) {
+  console.log("In addArticle...")
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
       const { title, author, abstract, keywords, date, body } =
         req.body;
+      console.log(author);
       const article = {
         title: title,
         // authors: authors.split(","),
