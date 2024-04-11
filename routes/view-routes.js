@@ -56,10 +56,17 @@ router.get("/account/:id", [requireLogin, userOnlyRoute], async (req, res) => {
   return res.render("account", { title: name, user, articles });
 });
 
-router.get("/add-article", [requireLogin], (req, res) => {
-  const layout = req.session.user.role === "user" ? "main.hbs" : "mod.hbs";
-  const isModView = req.session.user.role === "user" ? false : true;
-  return res.render("add-paper", { title: "Add Article", layout, isModView });
+router.get("/add-article", (req, res) => {
+  if(req.session.user){ //if logged in
+    const layout = req.session.user.role === "user" ? "main.hbs" : "mod.hbs";
+    const isModView = req.session.user.role === "user" ? false : true;
+    console.log("In /add-article... Logged in as " + req.session.user.email + " / " + req.session.user.username);
+    return res.render("add-paper", { title: "Add Article", layout, isModView });
+  }
+  else{
+    return res.render("login", {
+      msg: "You must be logged in to add books."});
+  }
 });
 
 router.get("/article/:id", [userOnlyRoute], async (req, res) => {

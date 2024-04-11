@@ -2,7 +2,7 @@
   <h3 class="article__heading">
     <a class="text-primary" href="/article/{{this._id}}">{{this.title}}</a></h3>
   <small class="article__authors">
-    {{#each authors}}
+    {{#each author}}
       {{this}},
     {{/each}}
   </small>
@@ -21,12 +21,6 @@
     {{/each}}
   </small>
   <br />
-  <small>
-    <b>DOI:</b>
-    <span class="citation">
-      {{this.citationInfo}}
-    </span>
-  </small>
   <p class="article__abstract">
     {{#trimString abstract}}
       {{this}}

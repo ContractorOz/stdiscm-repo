@@ -26,8 +26,14 @@ async function searchArticles(req, res) {
 
     const keyList = await listKeywords();
 
-    console.log(yearList);
-    console.log(keyList);
+    //TODO: only show the list of the query
+    // console.log(yearList);
+    // console.log(keyList);
+
+    console.log(q);
+    console.log(req.query);
+
+    // console.log(articles);
 
     return res.render("articles", {
       title: "Articles",

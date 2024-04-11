@@ -30,10 +30,19 @@
             {{/each}}
           {{/if}}
           </fieldset>
-      <fieldset form="searchForm" name="year" id="yearField">
+      <fieldset form="searchForm" name="keywords" id="keywordField">
       <h4>Genre</h4>
-		    {{#if genreList}}
-          {{#each genreList}}
+        <p><b>Main Genre</b></p>
+        <input type="checkbox" name="keywords" form="searchForm" id="{{this}}" value="Adventure" />
+        <input type="checkbox" name="keywords" form="searchForm" id="Romance" value="Adventure" />
+        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
+        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
+        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
+        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
+
+
+		    {{#if keyList}}
+          {{#each keyList}}
             <div>
               <input type="checkbox" name="keywords" form="searchForm" id="{{this}}" value="{{this}}" />
               <label for="{{this}}">{{this}}</label>

@@ -42,5 +42,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   searchInput.value = urlParams.get("q");
 
+  console.log(checkboxes);
+
   // const favButton = document.getElementById("toggleFavorites");
 });
