@@ -17,12 +17,14 @@ const { articleValidators } = require("../utils/validators");
 const upload = require("../middleware/multer");
 
 router.get("/search", userOnlyRoute, searchArticles);
+
 router.post(
   "/add-article",
   upload.single("file"),
   articleValidators,
   addArticle
 );
+
 router.put("/toggle-featured/:id", moderatorOnlyRoute, toggleFeaturedArticle);
 router.put("/toggle-vote/:id", toggleVote);
 

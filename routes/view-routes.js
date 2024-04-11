@@ -60,8 +60,31 @@ router.get("/add-article", (req, res) => {
   if(req.session.user){ //if logged in
     const layout = req.session.user.role === "user" ? "main.hbs" : "mod.hbs";
     const isModView = req.session.user.role === "user" ? false : true;
-    console.log("In /add-article... Logged in as " + req.session.user.email + " / " + req.session.user.username);
-    return res.render("add-paper", { title: "Add Article", layout, isModView });
+    console.log("In /add-article... Logged in as " + req.session.user.email + " / @" + req.session.user.username);
+    
+    genreList= [["canon-divergence","Canon Divergence"],
+            ["canon-compliance","Canon Compliance"],
+            ["char-death","Character Death"],
+            ["poetry","Poetry"],
+            ["dabble","Dabble"],
+            ["songfic","Song Fic"],
+            ["horror","Horror"],
+            ["romance","Romance"],
+            ["after-canon","After Canon"],
+            ["alternate","Alternate Universe (AU)"],
+            ["hurtno","Hurt/No Comfort"],
+            ["hurt","Hurt/Comfort"],
+            ["angst","Angst"],
+            ["tragedy","Tragedy"],
+            ["freestyle","Freestyle"],
+            ["script","Script"]]
+
+    return res.render("add-paper",
+      {
+        genreList: genreList,
+        title: "Add Article",
+        author: req.session.user.username,
+        layout, isModView });
   }
   else{
     return res.render("login", {

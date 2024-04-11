@@ -32,23 +32,24 @@
           </fieldset>
       <fieldset form="searchForm" name="keywords" id="keywordField">
       <h4>Genre</h4>
+        
         <p><b>Main Genre</b></p>
-        <input type="checkbox" name="keywords" form="searchForm" id="{{this}}" value="Adventure" />
-        <input type="checkbox" name="keywords" form="searchForm" id="Romance" value="Adventure" />
-        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
-        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
-        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
-        <input type="checkbox" name="keywords" form="searchForm" id="Adventure" value="Adventure" />
+        {{#each mainGenre}}
+          <div>
+            <input type="checkbox" name="keywords" form="form__input multiple-inputs" id="{{this.[0]}}" value="{{this.[1]}}" />
+            <label for="{{this.[0]}}">{{this.[1]}}</label>
+          </div>
+        {{/each}}
+
+        <p><b>Literature Type</b></p>
+        {{#each litType}}
+          <div>
+            <input type="checkbox" name="keywords" form="form__input multiple-inputs" id="{{this.[0]}}" value="{{this.[1]}}" />
+            <label for="{{this.[0]}}">{{this.[1]}}</label>
+          </div>
+        {{/each}}
 
 
-		    {{#if keyList}}
-          {{#each keyList}}
-            <div>
-              <input type="checkbox" name="keywords" form="searchForm" id="{{this}}" value="{{this}}" />
-              <label for="{{this}}">{{this}}</label>
-            </div>
-            {{/each}}
-          {{/if}}
         </fieldset>
         <button form="searchForm" class="pagination__btn"  name="filter" type="submit" id="filter-btn">Filter Results (TODO)</button>
 

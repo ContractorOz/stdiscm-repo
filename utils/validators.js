@@ -11,7 +11,7 @@ const { body, check } = require("express-validator");
 //     return value.match(pattern);
 //   })
 //   .withMessage("Please enter a valid DOI");
-const fileValidator = check("file")
+const fileValidator = check("file")   //TODO: modify this so that it gets the text from inside the docx
   .custom((value, { req }) => {
     if (req.file.mimetype === "application/pdf") {
       return ".pdf";
@@ -44,14 +44,14 @@ const registerValidators = [
 
 const articleValidators = [
   body("title").trim().notEmpty().withMessage("Title is required"),
-  body("author").trim().notEmpty().withMessage("Author is required"),
-  body("date").trim().notEmpty().withMessage("Publication date is required"),
-  body("keywords").trim().notEmpty().withMessage("Keywords are required"),
+  // body("author").trim().notEmpty().withMessage("Author is required"),
+  // body("date").trim().notEmpty().withMessage("Publication date is required"),
+  // body("keywords").trim().notEmpty().withMessage("Keywords are required"),
   body("body").trim().notEmpty().withMessage("Story's body is required"),
   body("abstract").trim().notEmpty().withMessage("Summary is required"),
 
   // DOIValidator,
-  fileValidator,
+  // fileValidator, //todo add this back for when doc file import is working naaa
 ];
 
 const editAccountValidators = [

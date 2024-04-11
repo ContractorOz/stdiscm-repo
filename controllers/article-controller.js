@@ -9,18 +9,34 @@ const {
   listYears,
   listKeywords,
   voteArticle,
+  identifyArticlesFromUnsuspended,
 } = require("../utils/helpers");
 
 async function searchArticles(req, res) {
   try {
-    const { q, year, keyword, page } = req.query;
+    const {q, year, keywords, page } = req.query;
 
     const years = Array.isArray(year) ? year : [year];
-    const keywords = Array.isArray(keyword) ? keyword : [keyword];
+    const keys = Array.isArray(keywords) ? keywords : [keywords];
 
-    const { docs, totalPages } = await getArticles({ q, years, keywords, page });
 
-    const articles = await identifyFavoriteArticles(req.session.user, docs);
+    const { docs, totalPages } = await getArticles({q, years, keys, page });
+
+    
+    // const nonSuspendedUsers = await User.find({suspended: false });
+    // const userIds = nonSuspendedUsers.map(user => user._id);
+    // const articles = await Article.find({ author: { $in: userIds } });
+
+
+
+    // const articles = await Article.find();
+    //problem occurs if I show all articles ^, but this (bottom) works
+    const articles1 = await identifyFavoriteArticles(req.session.user, docs);
+
+    const articles = await identifyArticlesFromUnsuspended(req.session.user, docs);
+
+
+    console.log(articles);
 
     const yearList = await listYears();
 
@@ -30,14 +46,34 @@ async function searchArticles(req, res) {
     // console.log(yearList);
     // console.log(keyList);
 
-    console.log(q);
-    console.log(req.query);
+    console.log("Keywords picked: "+keywords);
+    console.log(req.query); 
 
     // console.log(articles);
 
+    litType= [["canon-divergence","Canon Divergence"],
+            ["canon-compliance","Canon Compliance"],
+            ["char-death","Character Death"],
+            ["poetry","Poetry"],
+            ["dabble","Dabble"],
+            ["songfic","Song Fic"],
+            ["horror","Horror"],
+            ["romance","Romance"],
+            ["after-canon","After Canon"],
+            ["alternate","Alternate Universe (AU)"],
+            ["hurtno","Hurt/No Comfort"],
+            ["hurt","Hurt/Comfort"],
+            ["angst","Angst"],
+            ["tragedy","Tragedy"],
+            ["freestyle","Freestyle"],
+            ["script","Script"]]
+
+
+
     return res.render("articles", {
+      litType: litType,
       title: "Articles",
-      articles: articles,
+      articles: articles1, //problem here, sa hbs, di makuha cuz ndi daw parent lah
       isArticle: true,
       totalPages,
       docs: docs,
@@ -50,19 +86,24 @@ async function searchArticles(req, res) {
 }
 
 async function addArticle(req, res) {
-  console.log("In addArticle...")
+  
+  //this is to check if we got keywords (genre thing)
+  const { q, year, keywords} = req.query;
+  console.log(q);
+
   const errors = validationResult(req);
+  console.log(errors);
+
   if (errors.isEmpty()) {
     try {
-      const { title, author, abstract, keywords, date, body } =
+      const { title, author, abstract, keywords, body } =
         req.body;
-      console.log(author);
       const article = {
         title: title,
         // authors: authors.split(","),
         author: req.session.user.username, //the author automatically becomes the current user's username
         abstract: abstract,
-        publicationDate: new Date(date),
+        publicationDate: new Date(),  //date today
         keywords: keywords.split(","),
         // articleFile: req.file.location,
         body: body,

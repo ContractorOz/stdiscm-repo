@@ -1,8 +1,12 @@
-const yearList = [...Array(new Date().getFullYear() - 1900 + 1).keys()].map(
-  (x) => {
-    return { year: x + 1900 };
-  }
-);
+// const yearList = [...Array(new Date().getFullYear() - 1900 + 1).keys()].map(
+//   (x) => {
+//     return { year: x + 1900 };
+//   }
+// );
+
+
+//checkboxes for genre in add article
+const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
 new TomSelect("#date-input", {
   maxItems: 1,

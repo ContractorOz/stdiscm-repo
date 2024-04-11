@@ -18,14 +18,18 @@
 
         <label for="author">Author</label>
         <div class="message error-msg" id="author"></div>
-        <input type="text" name="author" id="author" class="form__input" value="{{author}}" disabled>
-
-        <label for="date">Year</label>
-        <div class="message error-msg" id="date"></div>
-        <select name="date" id="date-input" placeholder="Select Year" class="form__input"></select>
+        <input type="text" name="author" id="author" class="form__input" value="@{{author}}" disabled>
         
         <label for="keywords">Keywords</label>
         <div class="message error-msg" id="keywords"></div>
+
+        {{#each genreList}}
+          <div>
+            <input type="checkbox" name="keywords" form="form__input multiple-inputs" id="{{this.[0]}}" value="{{this.[1]}}" />
+            <label for="{{this.[0]}}">{{this.[1]}}</label>
+          </div>
+        {{/each}}
+
         <input type="text" name="keywords" class="form__input multiple-inputs" placeholder="Comma-separated list (e.g. Keyword1, Keyword2)">
         
         <label for="file">File</label>
@@ -35,12 +39,20 @@
         <label for="abstract">Abstract</label>
         <div class="message error-msg" id="abstract"></div>
         <textarea  name="abstract" id="abstract" cols="30" rows="10" class="form__input"></textarea>
+
+        <label for="body">Story</label>
+        <div class="message error-msg" id="body"></div>
+        <input type="text" name="body" id="body" class="form__input">
+        
+
+
+
         <div class="flex submit__container">
           <button class="button" id="submitBtn">Submit</button>
           <div class="loader"></div>
         </div>
-      </div>
 
+      </div>
     </form>
   </div>
 </section>

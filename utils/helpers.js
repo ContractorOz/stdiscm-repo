@@ -9,9 +9,26 @@ function checkIfFavorited(obj, list) {
   return false;
 }
 
+async function identifyArticlesFromUnsuspended(currUser, articles) {
+  // const articles = await Article.find());
+  // const user = await User.findById(currUser._id);
+
+  const nonSuspendedUsers = await User.find({suspended: false });
+  // console.log("nonSuspendedUsers: "+nonSuspendedUsers);
+
+  const usernames = nonSuspendedUsers.map(user => user.username);
+  console.log("nonSuspendedUsers: "+usernames);
+  const unsuspended_arts = await Article.find({ author: { $in: usernames } });
+  console.log("nonSuspendedUsers's Articles: "+unsuspended_arts);
+
+  return unsuspended_arts;
+}
+
+
 async function identifyFavoriteArticles(currUser, articles) {
   if (currUser) {
     const user = await User.findById(currUser._id);
+
     // return articles.map((article) => {
     //   return {
     //     ...article,
@@ -160,4 +177,5 @@ module.exports = {
   getPaginatedUsers,
   voteArticle,
   listKeywords,
+  identifyArticlesFromUnsuspended,
 };

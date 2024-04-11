@@ -41,11 +41,11 @@ const Article = new Schema({
     type: Boolean,
     default: false,
   },
-  // status: {
-  //   type: String,
-  //   enum: ["rejected", "pending", "approved"],
-  //   default: "pending",
-  // },
+  status: {
+    type: String,
+    enum: ["rejected", "pending", "approved"],
+    default: "approved",  //default pending dapat pero for this auto approve na muna
+  },
   // citationInfo: {
   //   type: String,
   //   required: true,
