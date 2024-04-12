@@ -19,8 +19,20 @@ async function searchArticles(req, res) {
     const years = Array.isArray(year) ? year : [year];
     const keys = Array.isArray(keywords) ? keywords : [keywords];
 
+    const filter = {};
+    if (author) {
+      const user = await User.findOne({ username: author });
+      if (user) {
+        filter.author = user._id;
+      }
+    }
 
-    const { docs, totalPages } = await getArticles({q, years, keys, page });
+        // Add keywords filtering
+    if (keys.length > 0) {
+        filter.keywords = { $in: keys }; // Filter articles with any of the specified keywords
+    }
+
+    const { docs, totalPages } = await getArticles({q, years, keys, page, filter });
 
     
     // const nonSuspendedUsers = await User.find({suspended: false });
@@ -34,7 +46,6 @@ async function searchArticles(req, res) {
     const articles1 = await identifyFavoriteArticles(req.session.user, docs);
 
     const articles = await identifyArticlesFromUnsuspended(req.session.user, docs);
-
 
     console.log(articles);
 
