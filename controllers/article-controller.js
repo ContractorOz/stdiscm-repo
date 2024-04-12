@@ -14,11 +14,11 @@ const {
 
 async function searchArticles(req, res) {
   try {
-    const {q, year, keywords, page } = req.query;
+    const { q, year, keywords, page } = req.query;
 
     const years = Array.isArray(year) ? year : [year];
     const keys = Array.isArray(keywords) ? keywords : [keywords];
-/*
+    /*
     const filter = {};
     if (author) {
       const user = await User.findOne({ username: author });
@@ -36,21 +36,21 @@ async function searchArticles(req, res) {
     if (q) {
       filter.keywords = q; // Assuming 'q' represents the literary type
     } */
-    const { docs, totalPages } = await getArticles({q, years, keys, page }); 
-    //const { docs, totalPages } = await getArticles({q, years, keys, page }); 
+    const { docs, totalPages } = await getArticles({ q, years, keys, page });
+    //const { docs, totalPages } = await getArticles({q, years, keys, page });
 
-    
     //const nonSuspendedUsers = await User.find({suspended: false });
     //const userIds = nonSuspendedUsers.map(user => user._id);
     //const articles = await Article.find({ author: { $in: userIds } });
-
-
 
     // const articles = await Article.find();
     //problem occurs if I show all articles ^, but this (bottom) works
     const articles1 = await identifyFavoriteArticles(req.session.user, docs);
 
-    const articles = await identifyArticlesFromUnsuspended(req.session.user, docs);
+    const articles = await identifyArticlesFromUnsuspended(
+      req.session.user,
+      docs
+    );
 
     console.log(articles);
 
@@ -62,29 +62,29 @@ async function searchArticles(req, res) {
     // console.log(yearList);
     // console.log(keyList);
 
-    console.log("Keywords picked: "+keywords);
-    console.log(req.query); 
+    console.log("Keywords picked: " + keywords);
+    console.log(req.query);
 
     // console.log(articles);
 
-    const litType= [["canon-divergence","Canon Divergence"],
-            ["canon-compliance","Canon Compliance"],
-            ["char-death","Character Death"],
-            ["poetry","Poetry"],
-            ["dabble","Dabble"],
-            ["songfic","Song Fic"],
-            ["horror","Horror"],
-            ["romance","Romance"],
-            ["after-canon","After Canon"],
-            ["alternate","Alternate Universe (AU)"],
-            ["hurtno","Hurt/No Comfort"],
-            ["hurt","Hurt/Comfort"],
-            ["angst","Angst"],
-            ["tragedy","Tragedy"],
-            ["freestyle","Freestyle"],
-            ["script","Script"]]
-
-
+    const litType = [
+      ["canon-divergence", "Canon Divergence"],
+      ["canon-compliance", "Canon Compliance"],
+      ["char-death", "Character Death"],
+      ["poetry", "Poetry"],
+      ["dabble", "Dabble"],
+      ["songfic", "Song Fic"],
+      ["horror", "Horror"],
+      ["romance", "Romance"],
+      ["after-canon", "After Canon"],
+      ["alternate", "Alternate Universe (AU)"],
+      ["hurtno", "Hurt/No Comfort"],
+      ["hurt", "Hurt/Comfort"],
+      ["angst", "Angst"],
+      ["tragedy", "Tragedy"],
+      ["freestyle", "Freestyle"],
+      ["script", "Script"],
+    ];
 
     return res.render("articles", {
       litType: litType,
@@ -102,9 +102,8 @@ async function searchArticles(req, res) {
 }
 
 async function addArticle(req, res) {
-  
   //this is to check if we got keywords (genre thing)
-  const { q, year, keywords} = req.query;
+  const { q, year, keywords } = req.query;
   console.log(q);
 
   const errors = validationResult(req);
@@ -112,14 +111,13 @@ async function addArticle(req, res) {
 
   if (errors.isEmpty()) {
     try {
-      const { title, author, abstract, keywords, body } =
-        req.body;
+      const { title, author, abstract, keywords, body } = req.body;
       const article = {
         title: title,
         // authors: authors.split(","),
         author: req.session.user.username, //the author automatically becomes the current user's username
         abstract: abstract,
-        publicationDate: new Date(),  //date today
+        publicationDate: new Date(), //date today
         keywords: keywords.split(","),
         // articleFile: req.file.location,
         body: body,
