@@ -32,12 +32,14 @@ app.use(
     store:
       process.env.NODE_ENV === "test"
         ? ""
-        : MongoStore.connect(
-            "mongodb://rootFinal:rootroot@final-db-cluster.cluster-cpuaqu8wsgkj.ap-southeast-2.docdb.amazonaws.com:27017/?tls=true&retryWrites=false&directConnection=true",
-            {
-              tlsCAFile: "global-bundle.pem",
-            }
-          ),
+        : MongoStore
+            .connect
+
+            // ,
+            // {
+            //   tlsCAFile: "global-bundle.pem",
+            // }
+            (),
     saveUninitialized: true,
     resave: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, //TODO: add secure:true on deployment
