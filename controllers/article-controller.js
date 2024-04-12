@@ -14,10 +14,23 @@ const {
 
 async function searchArticles(req, res) {
   try {
-    const { q, year, keywords, page } = req.query;
+    // q is title
+    const { q,  year, keywords, page } = req.query;
 
     const years = Array.isArray(year) ? year : [year];
     const keys = Array.isArray(keywords) ? keywords : [keywords];
+
+    const filter = {};
+
+    // Search by title or keywords
+    if (q) {
+      filter.$or = [
+        { title: { $regex: q, $options: "i" } },
+        {  author: { $regex: q, $options: "i" }}, // Case-insensitive title search
+        { keywords: { $in: [q] } } // Keyword search
+      ];
+    } 
+
     /*
     const filter = {};
     if (author) {
