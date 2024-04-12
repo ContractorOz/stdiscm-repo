@@ -18,26 +18,31 @@ async function searchArticles(req, res) {
 
     const years = Array.isArray(year) ? year : [year];
     const keys = Array.isArray(keywords) ? keywords : [keywords];
-
+/*
     const filter = {};
     if (author) {
       const user = await User.findOne({ username: author });
       if (user) {
         filter.author = user._id;
       }
-    }
+    } 
 
         // Add keywords filtering
     if (keys.length > 0) {
         filter.keywords = { $in: keys }; // Filter articles with any of the specified keywords
-    }
-
-    const { docs, totalPages } = await getArticles({q, years, keys, page, filter });
+    }*/
+    /*
+    const filter = {};
+    if (q) {
+      filter.keywords = q; // Assuming 'q' represents the literary type
+    } */
+    const { docs, totalPages } = await getArticles({q, years, keys, page }); 
+    //const { docs, totalPages } = await getArticles({q, years, keys, page }); 
 
     
-    // const nonSuspendedUsers = await User.find({suspended: false });
-    // const userIds = nonSuspendedUsers.map(user => user._id);
-    // const articles = await Article.find({ author: { $in: userIds } });
+    //const nonSuspendedUsers = await User.find({suspended: false });
+    //const userIds = nonSuspendedUsers.map(user => user._id);
+    //const articles = await Article.find({ author: { $in: userIds } });
 
 
 
@@ -62,7 +67,7 @@ async function searchArticles(req, res) {
 
     // console.log(articles);
 
-    litType= [["canon-divergence","Canon Divergence"],
+    const litType= [["canon-divergence","Canon Divergence"],
             ["canon-compliance","Canon Compliance"],
             ["char-death","Character Death"],
             ["poetry","Poetry"],
