@@ -4,7 +4,9 @@ require("dotenv").config();
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url: process.env.DB_URI || "mongodb://localhost:27017",
+    url:
+      process.env.DB_URI ||
+      "mongodb://rootFinal:rootroot@final-db-cluster.cluster-cpuaqu8wsgkj.ap-southeast-2.docdb.amazonaws.com:27017/?tls=true&retryWrites=false&directConnection=true",
 
     // TODO Change this to your database name:
     databaseName: "stdiscm-db",
