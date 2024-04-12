@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
@@ -21,8 +22,7 @@ const hbs = exphbs.create({
   helpers: hbsHelpers,
 });
 
-const DB_URI =
-  process.env.DB_URI || "mongodb://localhost:27017/stdiscm-db"; //TODO: change to prod once deployed
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/stdiscm-db"; //TODO: change to prod once deployed
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,7 +32,12 @@ app.use(
     store:
       process.env.NODE_ENV === "test"
         ? ""
-        : MongoStore.create({ mongoUrl: DB_URI }),
+        : MongoStore.connect(
+            "mongodb://rootFinal:rootroot@final-db-cluster.cluster-cpuaqu8wsgkj.ap-southeast-2.docdb.amazonaws.com:27017/?tls=true&retryWrites=false&directConnection=true",
+            {
+              tlsCAFile: "global-bundle.pem",
+            }
+          ),
     saveUninitialized: true,
     resave: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, //TODO: add secure:true on deployment
