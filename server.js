@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    "mongodb://rootFinal:rootroot@final-db-cluster.cluster-cpuaqu8wsgkj.ap-southeast-2.docdb.amazonaws.com:27017/?tls=true&retryWrites=false&directConnection=true",
+    "mongodb://rootFinal:rootroot@final-db-cluster.cluster-cpuaqu8wsgkj.ap-southeast-2.docdb.amazonaws.com:27017/?tls=true&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=falsedirectConnection=true",
     {
       tlsCAFile: "global-bundle.pem",
       useNewUrlParser: true,
