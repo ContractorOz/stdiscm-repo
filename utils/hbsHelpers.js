@@ -43,17 +43,17 @@ const helpers = {
     }
   },
   isUpvoted: (upvotes, id, options) => {
-    if (upvotes.includes(id.toString())) {
-      return options.fn("");
-    }
-    return options.fn("-outlined");
+    // if (upvotes.includes(id.toString())) {
+    //   return options.fn("");
+    // }
+    // return options.fn("-outlined");
   },
 
   isDownvoted: (downvotes, id, options) => {
-    if (downvotes.includes(id.toString())) {
-      return options.fn("");
-    }
-    return options.fn("-outlined");
+    // if (downvotes.includes(id.toString())) {
+    //   return options.fn("");
+    // }
+    // return options.fn("-outlined");
   },
 };
 

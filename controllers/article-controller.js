@@ -12,6 +12,13 @@ const {
   identifyArticlesFromUnsuspended,
 } = require("../utils/helpers");
 
+
+async function deleteArticleArticle(req, res) {
+  await Article.findByIdAndDelete(req.params.id);
+  return res.redirect("/");
+  // res.status(200).json({ success: true });
+}
+
 async function searchArticles(req, res) {
   try {
     const {q, year, keywords, page } = req.query;
@@ -295,4 +302,5 @@ module.exports = {
   deleteComment,
   editCommentDone,
   toggleVote,
+  deleteArticleArticle,
 };

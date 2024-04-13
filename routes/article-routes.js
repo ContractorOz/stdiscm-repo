@@ -5,6 +5,7 @@ const {
   addArticle,
   toggleFeaturedArticle,
   toggleVote,
+  deleteArticleArticle,
 } = require("../controllers/article-controller");
 
 const {
@@ -27,5 +28,7 @@ router.post(
 
 router.put("/toggle-featured/:id", moderatorOnlyRoute, toggleFeaturedArticle);
 router.put("/toggle-vote/:id", toggleVote);
+
+router.get("/article/delete/:id", deleteArticleArticle);
 
 module.exports = router;
