@@ -44,16 +44,22 @@ router.get("/register", [alreadyLoggedIn], (req, res) => {
 
 router.get("/account/:id", [requireLogin, userOnlyRoute], async (req, res) => {
   const user = await User.findById(req.params.id).lean();
-
   const { username } = user;
   const name = `${username}`;
 
-  //TODO FIND ARTICLES BY author == req.session.user.username
+  //TODO FIND ARTICLES BY ANOTHER author
+  //name = "username" ng user = "author" ng article
+  //
   //then render the page also with article
   const articles = await Article.find({ author: req.session.user.username }).lean();
-  console.log(articles);
+  if (articles)
+  {
+    console.log(articles);
+    return res.render("account", { title: name, user, articles });
 
-  return res.render("account", { title: name, user, articles });
+  }
+
+  return res.render("account", { title: name, user });
 });
 
 router.get("/add-article", (req, res) => {
