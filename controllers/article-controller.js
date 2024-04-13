@@ -138,7 +138,7 @@ async function addArticle(req, res) {
         author: req.session.user.username, //the author automatically becomes the current user's username
         abstract: abstract,
         publicationDate: new Date(), //date today
-        keywords: keywords.split(","),
+        // keywords: keywords.split(","),
         // articleFile: req.file.location,
         body: body,
       };
