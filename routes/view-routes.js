@@ -44,16 +44,22 @@ router.get("/register", [alreadyLoggedIn], (req, res) => {
 
 router.get("/account/:id", [requireLogin, userOnlyRoute], async (req, res) => {
   const user = await User.findById(req.params.id).lean();
-
   const { username } = user;
   const name = `${username}`;
 
-  //TODO FIND ARTICLES BY author == req.session.user.username
+  //TODO FIND ARTICLES BY ANOTHER author
+  //name = "username" ng user = "author" ng article
+  //
   //then render the page also with article
   const articles = await Article.find({ author: req.session.user.username }).lean();
-  console.log(articles);
+  if (articles)
+  {
+    console.log(articles);
+    return res.render("account", { title: name, user, articles });
 
-  return res.render("account", { title: name, user, articles });
+  }
+
+  return res.render("account", { title: name, user });
 });
 
 router.get("/add-article", (req, res) => {
@@ -95,9 +101,9 @@ router.get("/add-article", (req, res) => {
 router.get("/article/:id", [userOnlyRoute], async (req, res) => {
   const doc = await Article.findById(req.params.id).lean();
 
-  const comments_temp = [];
+  // const comments_temp = [];
   let dump = {};
-  const comm = doc.comments; //array of comments
+  // const comm = doc.comments; //array of comments
   let loggedIn = false;
   let suspendedName = "Suspended User";
   let suspendedMsg = "This user is suspended.";
@@ -106,45 +112,45 @@ router.get("/article/:id", [userOnlyRoute], async (req, res) => {
     loggedIn = true;
   }
 
-  try {
-    if (comm) {
-      for (let i = 0; i < comm.length; i++) {
-        const user = await User.findById(doc.comments[i].commenter).lean();
-        if (user._id === req.session?.user?._id) {
-          dump = {
-            commenter: user._id.toString(),
-            name: "@"+user.username,
-            msg: doc.comments[i].msg,
-            _id: doc.comments[i]._id,
-          };
-        } else if (user.suspended) {
-          dump = {
-            commenter: user._id.toString(),
-            name: suspendedName,
-            msg: suspendedMsg,
-            _id: doc.comments[i]._id,
-          };
-        } else {
-          dump = {
-            commenter: user._id.toString(),
-            name: "@"+user.username,
-            msg: doc.comments[i].msg,
-            _id: doc.comments[i]._id,
-          };
-        }
-        comments_temp.push(dump);
-      }
-    }
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   if (comm) {
+  //     for (let i = 0; i < comm.length; i++) {
+  //       const user = await User.findById(doc.comments[i].commenter).lean();
+  //       if (user._id === req.session?.user?._id) {
+  //         dump = {
+  //           commenter: user._id.toString(),
+  //           name: "@"+user.username,
+  //           msg: doc.comments[i].msg,
+  //           _id: doc.comments[i]._id,
+  //         };
+  //       } else if (user.suspended) {
+  //         dump = {
+  //           commenter: user._id.toString(),
+  //           name: suspendedName,
+  //           msg: suspendedMsg,
+  //           _id: doc.comments[i]._id,
+  //         };
+  //       } else {
+  //         dump = {
+  //           commenter: user._id.toString(),
+  //           name: "@"+user.username,
+  //           msg: doc.comments[i].msg,
+  //           _id: doc.comments[i]._id,
+  //         };
+  //       }
+  //       comments_temp.push(dump);
+  //     }
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   return res.render("article-page", {
     title: "Article",
     isLoggedIn: loggedIn,
     article: article[0],
-    comments: doc.comments,
-    comments_temp: comments_temp,
+    // comments: doc.comments,
+    // comments_temp: comments_temp,
     sess: req.session?.user?._id ?? undefined,
   });
 });

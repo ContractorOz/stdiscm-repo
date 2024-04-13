@@ -6,7 +6,8 @@
 
 
 //checkboxes for genre in add article
-const checkboxes = document.querySelectorAll("input[type=checkbox]");
+
+// const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
 new TomSelect("#date-input", {
   maxItems: 1,

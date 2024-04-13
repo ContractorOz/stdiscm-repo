@@ -20,7 +20,8 @@
         <div class="message error-msg" id="author"></div>
         <input type="text" name="author" id="author" class="form__input" value="@{{author}}" disabled>
         
-        <label for="keywords">Keywords</label>
+        <label for="keywords">Genres and Tags</label>
+        <h4>Please select all that applies.</h4>
         <div class="message error-msg" id="keywords"></div>
 
         {{#each genreList}}
@@ -30,8 +31,11 @@
           </div>
         {{/each}}
 
-        <input type="text" name="keywords" class="form__input multiple-inputs" placeholder="Comma-separated list (e.g. Keyword1, Keyword2)">
-        
+
+        <input type="checkbox" name="keywords" form="form__input multiple-inputs" id="keywords2" value="Keywords" />
+        <label for="keywords2">TESTING</label>
+
+
         <label for="file">File</label>
         <div class="message error-msg" id="file"></div>
         <input type="file" name="file" id="file" accept="application/pdf" >
@@ -42,7 +46,7 @@
 
         <label for="body">Story</label>
         <div class="message error-msg" id="body"></div>
-        <input type="text" name="body" id="body" class="form__input">
+        <textarea  name="body" id="body" cols="100" rows="10" class="form__input"></textarea>
         
 
 

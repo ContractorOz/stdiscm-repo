@@ -24,3 +24,7 @@
 .oneliner_element {
 	display:inline-block;
 }
+
+.pre-wrap{
+  white-space: pre-wrap;
+  }

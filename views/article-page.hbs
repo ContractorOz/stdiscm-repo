@@ -82,18 +82,23 @@
   </div>
   <div class="abstract">
     <h4>Abstract</h4>
-    <p>{{article.abstract}}</p>
+    <p class="pre-wrap">{{article.abstract}}</p>
   </div>
   <br>
 
 
+<<<<<<< Updated upstream
+  <div class="body pre-wrap">
+=======
+  
   <div class="body">
+>>>>>>> Stashed changes
     <p>{{article.body}}</p>
   </div>
 
   <br>
   <hr>
-  <h4>Comments</h4>
+  <h4>Commentsaaaa<a method="GET" href="/articles/article/delete/{{article._id}}">{{article.title}}<- DELETE ME</a></h4>
   {{#if userId}}
     <form onsubmit="return checkIfEmpty()" method="POST" action="{{article._id}}/comment/new" class="margin-left-32 comment-overflow">
     <h4>Add a new comment</h4>
